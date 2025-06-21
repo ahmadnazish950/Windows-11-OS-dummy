@@ -1,0 +1,443 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.screen-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+.screen-icon span {
+  position: absolute;
+  margin-top: 3rem;
+  right: -5px;
+}
+
+.this-pc {
+  position: absolute;
+  top: 120px;
+  left: 10px;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+img.screen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#start-menu {
+  display: flex;
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  z-index: 3;
+}
+
+.window {
+  position: absolute;
+  width: 100%;
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+  z-index: 2;
+  position: relative;
+}
+
+.file-explorer {
+  position: absolute;
+  bottom: 15px;
+  left: 70px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+}
+
+.searchbar {
+  position: absolute;
+  bottom: 8px;
+  left: 130px;
+  cursor: pointer;
+}
+
+.Vs-code {
+  position: absolute;
+  bottom: 8px;
+  left: 180px;
+  cursor: pointer;
+}
+
+.chrome {
+  position: absolute;
+  bottom: 8px;
+  left: 235px;
+  cursor: pointer;
+}
+
+.system-tray {
+  position: fixed;
+  /* Use fixed to keep it in place on screen */
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 6px 12px;
+  border-radius: 8px;
+  z-index: 100;
+}
+
+.system-tray i {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.clock-date {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+
+/* on click design */
+
+.system-panel {
+  position: absolute;
+  bottom: 50px;
+  right: 2px;
+  width: 340px;
+  padding: 20px;
+  background: rgba(52, 51, 51, 0.9);
+  color: white;
+  font-family: sans-serif;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.tray-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  overflow: hidden;
+
+}
+
+.tray-toggle {
+  background: #424141;
+  border-radius: 12px;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tray-toggle:hover {
+  background: #2a2929;
+}
+
+.tray-toggle[data-status="on"] {
+  background: #aeea00;
+  color: #0c0c0c;
+}
+
+.tray-toggle i {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.tray-toggle span {
+  font-size: 12.5px;
+}
+
+.tray-toggle small {
+  display: block;
+  font-size: 10px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.sliders {
+  margin-top: 15px;
+  border-top: 1px solid #444;
+  padding-top: 10px;
+}
+
+.slider-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.slider-group input[type="range"] {
+  flex: 1;
+  accent-color: #aeea00;
+}
+
+.bottom-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.chrome-open {
+  position: fixed;
+  top: 60px;
+  left: 100px;
+  width: 500px;
+  height: 300px;
+  background: rgb(93, 91, 91);
+  border-radius: 4px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.chrome-header {
+  background: rgb(63, 61, 61);
+  color: white;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.chrome-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.chrome-buttons #minimize {
+  background: white;
+  border: none;
+  padding: 3px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.chrome-buttons #minimize:hover {
+  background: lightblue;
+}
+
+.chrome-buttons #maximize {
+  background: white;
+  border: none;
+  padding: 3px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.chrome-buttons #maximize:hover {
+  background: rgb(208, 208, 33);
+}
+
+.chrome-buttons #close {
+  background: white;
+  border: none;
+  padding: 3px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.chrome-buttons #close:hover {
+  background: rgb(196, 29, 29);
+}
+
+.chrome-content {
+  padding: 20px;
+  font-size: 18px;
+  color: wheat;
+}
+
+
+.vscode-open {
+  position: fixed;
+  top: 60px;
+  left: 100px;
+  width: 500px;
+  height: 300px;
+  background: rgb(66, 76, 133);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.vscode-header {
+  background: rgb(114, 141, 188);
+  color: white;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.vscode-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.vscode-buttons #minimize {
+  background: white;
+  border: none;
+  padding: 3px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.vscode-buttons #minimize:hover {
+  background: lightblue;
+}
+
+.vscode-buttons #maximize {
+  background: white;
+  border: none;
+  padding: 3px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.vscode-buttons #maximize:hover {
+  background: rgb(208, 208, 33);
+}
+
+.vscode-buttons #close {
+  background: white;
+  border: none;
+  padding: 3px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.vscode-buttons #close:hover {
+  background: rgb(196, 29, 29);
+}
+
+.vscode-content {
+  padding: 20px;
+  font-size: 18px;
+  color: wheat;
+}
+
+/* testing stuff */
+
+.window-toggle {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  width: 500px;
+  background: rgba(116, 141, 150, 0.9);
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.start-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.start-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+
+
+.start-icon {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background: #536e76;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.start-icon svg {
+  margin-left: 17.5px;
+}
+
+.start-icon:hover {
+  background: #3c5557;
+}
+
+.start-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  border-top: 1px solid #555;
+  padding-top: 10px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.power {
+  cursor: pointer;
+  font-size: 20px;
+}
