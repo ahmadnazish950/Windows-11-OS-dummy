@@ -2,6 +2,128 @@ let systemtray = document.querySelector('.system-tray')
 let chromebtn = document.querySelector('.chrome')
 let vscodebtn = document.querySelector('.Vs-code')
 let startmenu = document.querySelector('#start-menu')
+let thispc = document.querySelector('.this-pc')
+
+function showContent(text) {
+  const pcMain = document.querySelector(".pc-main");
+  const rightPanel = document.getElementById("rightPanel");
+
+  if (text === "This is This PC") {
+    rightPanel.innerHTML = "";
+    if (pcMain) pcMain.style.display = "block"; 
+  } else {
+    rightPanel.innerHTML = `<h2>${text}</h2>`;
+    if (pcMain) pcMain.style.display = "none"; 
+  }
+}
+thispc.addEventListener('dblclick', () => {
+  let openpc = document.createElement('div')
+  openpc.className = "open-pc"
+  openpc.innerHTML = `
+      <div class="pc-window">
+      <div class="pc-header">
+        <span>This PC</span>
+        <div class="pc-controls">
+          <button id="minimize">🗕</button>
+        <button id="maximize">🗖</button>
+        <button id="close">✖</button>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-sidebar">
+          <ul>
+            <li onclick='showContent("This is Home")'>🏠 Home</li>
+            <li onclick='showContent("This is Desktop")'>🖥️ Desktop</li>
+            <li onclick='showContent("This is Documents")'>📄 Documents</li>
+            <li onclick='showContent("This is Downloads")'>📥 Downloads</li>
+            <li onclick='showContent("This is Pictures")'>🖼️ Pictures</li>
+            <li onclick='showContent("This is Music")'>🎵 Music</li>
+            <li onclick='showContent("This is Videos")'>🎞️ Videos</li>
+            <li onclick='showContent("This is This PC")'>💻 This PC</li>
+            <li onclick='showContent("This is Network")'>🌐 Network</li>
+          </ul>
+        </div>
+        <div class="pc-content" id="rightPanel"></div>
+        <div class="pc-main">
+          <h3>Devices and drives</h3>
+          <div class="drive">
+            <img src="./c-drive.png" />
+            <div class="drive-info">
+              <p>OS (C:)</p>
+              <div class="progress-bar">
+                <div class="progress" style="width: 40%"></div>
+              </div>
+              <span>178 GB free of 447 GB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+  document.body.appendChild(openpc);
+
+
+
+
+  const maximizeBtn = openpc.querySelector('#maximize');
+  let isMaximized = false;
+  maximizeBtn.addEventListener('click', () => {
+    if (!isMaximized) {
+      openpc.style.top = '0';
+      openpc.style.left = '0';
+      openpc.style.width = '100vw';
+      openpc.style.height = '100vh';
+      isMaximized = true;
+    } else {
+      openpc.style.top = '60px';
+      openpc.style.left = '100px';
+      openpc.style.width = '70vw';
+      openpc.style.height = '70vh';
+      isMaximized = false;
+    }
+  });
+
+  const close = openpc.querySelector('#close')
+  close.addEventListener('click', () => {
+    openpc.remove()
+  })
+
+  let newX = 0
+  let newY = 0
+  let startX = 0
+  let startY = 0
+
+  openpc.addEventListener('mousedown', mousedown)
+
+  function mousedown(e) {
+    startX = e.clientX
+    startY = e.clientY
+
+    document.addEventListener('mousemove', mousemove)
+    document.addEventListener('mouseup', mouseup)
+
+  }
+
+  function mousemove(e) {
+    newX = startX - e.clientX
+    newY = startY - e.clientY
+
+    startX = e.clientX
+    startY = e.clientY
+
+    openpc.style.top = (openpc.offsetTop - newY) + 'px'
+    openpc.style.left = (openpc.offsetLeft - newX) + 'px'
+
+  }
+
+  function mouseup(e) {
+    document.removeEventListener('mousemove', mousemove)
+    document.removeEventListener('mouseup', mouseup)
+
+  }
+
+
+})
 
 startmenu.addEventListener('click', function () {
   const existingPanel = document.querySelector(".window-toggle")
